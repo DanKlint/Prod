@@ -1,0 +1,111 @@
+.search-filters {
+	margin-top: 60px;
+	margin-bottom: 60px;
+	display: flex;
+	justify-content: center;
+}
+
+.filters-button {
+	border: none;
+	outline: none;
+	border-radius: 11px;
+	background: rgb(254, 254, 254);
+	margin-left: 4px;
+}
+
+.filters-button img {
+	width: 24px;
+	margin-top: 2px;
+}
+
+.list {
+	min-height: 280px;
+	display: flex;
+	list-style: none;
+	overflow-x: auto;
+	position: relative;
+	padding-left: 10px;
+	overflow-y: hidden;
+}
+
+.slider-line {
+	margin-bottom: 50px;
+}
+
+li {
+	margin-right: 10px;
+}
+
+.slider-genre {
+	font-size: 22px;
+	margin-bottom: 10px;
+	padding-left: 20px;
+	font-family: var(--main-bold-font);
+}
+
+.list::-webkit-scrollbar {
+	width: 6px;
+	height: 4px;
+}
+
+.list::-webkit-scrollbar-track {
+	background: inherit;
+}
+
+.list::-webkit-scrollbar-thumb {
+	background-color: rgb(206, 206, 206);
+	border-radius: 20px;
+}
+
+
+
+/* Фильтры */
+
+input[type="radio"] {
+	position: absolute;
+	left: -9999px;
+}
+
+.filters-genre label {
+	color: white;
+	border-radius: 2rem;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.filters-genre {
+	margin-bottom: 15px;
+}
+
+.filters-genre li {
+	margin-bottom: 5px;
+}
+
+.filters-genre label:hover {
+	background: rgb(85, 0, 128);
+	color: white;
+	padding: 0.5rem 1rem;
+}
+
+.filters-country label {
+	color: white;
+	border-radius: 2rem;
+	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.filters-country li {
+	margin-bottom: 5px;
+}
+
+.filters-country label:hover {
+	background: rgb(85, 0, 128);
+	color: white;
+	padding: 0.5rem 1rem;
+}
+
+.filter-title {
+	color: rgb(0, 0, 0);
+	font-size: 1.3rem;
+	margin-bottom: 10px;
+}

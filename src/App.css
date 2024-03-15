@@ -1,0 +1,103 @@
+:root {
+  font-size: 16px;
+  font-family: "Impact", sans-serif;
+
+  --main-background-color: #081b29;
+  --main-text-color: white;
+  --main-bold-font: "Font Name";
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  color: var(--main-text-color);
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  color: var(--main-text-color);
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a,
+button {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--main-text-color);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse farthest-corner at right bottom,
+      #c800ff 0%,
+      #980fbe 8%,
+      #561169 25%,
+      #380e43 35%,
+      transparent 60%),
+    radial-gradient(ellipse farthest-corner at left top,
+      #0ef 0%,
+      rgb(8, 184, 197) 8%,
+      rgb(13, 72, 120) 25%,
+      rgb(12, 69, 97) 62.5%,
+      #081b29 100%);
+}
+
+@font-face {
+  font-family: "Font Name";
+  src: local("Font Name"), url(/public/assets/font.ttf);
+}
+
+.line {
+  margin: 0 auto;
+  background-color: rgb(206, 206, 206);
+  height: 1px;
+  min-width: 80%;
+  max-width: 80%;
+  margin-top: 10px;
+}
+
+.container {
+  max-width: 80%;
+  margin: auto;
+  position: relative;
+  min-height: calc(100vh - 143px - 130px - 40px - 10px);
+}
+
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--main-background-color);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(206, 206, 206);
+  border-radius: 20px;
+}

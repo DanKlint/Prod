@@ -1,0 +1,38 @@
+header {
+	margin-bottom: 25px;
+	margin-top: 15px;
+}
+
+.wrapper {
+	max-width: 1000px;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.logo {
+	text-align: center;
+}
+
+.site-name {
+	font-size: 44px;
+	margin-top: 15px;
+	text-decoration: none;
+	font-family: 'Impact';
+}
+
+.menu {
+	margin-top: 20px;
+}
+
+.menu__list {
+	display: flex;
+	list-style: none;
+	justify-content: space-around;
+	padding: 0;
+	margin: 0;
+}
+
+.menu__link {
+	font-size: 18px;
+	text-decoration: none;
+}
