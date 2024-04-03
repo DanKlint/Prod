@@ -14,7 +14,6 @@ const ActorCardImpl = ({ id, img, first_name, last_name, years, description }) =
         </div>
         <div className={styles["info"]}>
           <p className={styles["info__name"]}>{first_name} {last_name}</p>
-          {/* Используем обрезанное описание */}
           <p className={styles["info__description"]}>
             {truncatedDescription}
           </p>

@@ -244,6 +244,8 @@ const Home = () => {
 					</li>
 				</ol>
 
+				<div className="line"></div>
+
 				<div className={styles["filter-title"]}>Страна:</div>
 				<input type="radio" id="All" name="country" value="All" checked={selectedCountry === 'All'}
 					onChange={handleCountryChange} />
