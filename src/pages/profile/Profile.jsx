@@ -15,9 +15,10 @@ const Profile = () => {
             </div>
             <div className={styles["profile-details"]}>
               <p className={styles["name"]}>Клинцев Даниил</p>
-              <p className={styles["login"]}>ЛОгин</p>
+              <p className={styles["login"]}>Логин</p>
               <p className={styles["e-mail"]}>klintcevd@mail.ru</p>
               <p className={styles["birthday"]}>08.11.2001</p>
+              {/*ПОЛЬЗОВАТЕЛЬ: логин, пароль, имейл, имя, фамиллия, дата рождения */}
               <button>Редактировать</button>
               <button>Сменить пароль</button>
             </div>

@@ -7,6 +7,7 @@ import News from "./pages/news/News";
 import { Routes, Route } from "react-router-dom";
 import React from "react";
 // import Footer from "./components/footer/Footer";
+// import RequireAuth from './utils/requireAuth.jsx';
 import Actors from "./pages/actors/Actors";
 import Contacts from "./pages/contacts/Contacts";
 import Profile from "./pages/profile/Profile";
@@ -18,15 +19,22 @@ function App() {
       {/* <Header /> */}
       <Routes>
         {/* <React.Fragment className="container"> */}
-        <Route path="/" index element={<Home />} />
-        <Route path="/news" index element={<News />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/" index element={<Home />} />
+        <Route path="/news" index element={<News />} />
         <Route path="/actors" element={<Actors />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/movie/:id" element={<Movie />} />
-
+        {/* <Route element={<RequireAuth />}>
+          <Route path="/" index element={<Home />} />
+          <Route path="/news" index element={<News />} />
+          <Route path="/actors" element={<Actors />} />
+          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/movie/:id" element={<Movie />} />
+        </Route> */}
         {/* <Route path='*' element={<Error/>}/> */}
         {/* </React.Fragment> */}
       </Routes>

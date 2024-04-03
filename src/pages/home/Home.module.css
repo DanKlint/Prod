@@ -18,6 +18,20 @@
 	margin-top: 2px;
 }
 
+.list-movies {
+	display: flex;
+	list-style: none;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	position: relative;
+	padding-left: 10px;
+}
+
+.list-movies li {
+	margin-right: 10px;
+	margin-bottom: 50px;
+}
+
 .list {
 	min-height: 280px;
 	display: flex;
@@ -43,6 +57,14 @@ li {
 	font-family: var(--main-bold-font);
 }
 
+.slider-genre-catalog {
+	font-size: 22px;
+	margin-bottom: 10px;
+	padding-left: 20px;
+	font-family: var(--main-bold-font);
+	cursor: pointer;
+}
+
 .list::-webkit-scrollbar {
 	width: 6px;
 	height: 4px;
@@ -55,6 +77,30 @@ li {
 .list::-webkit-scrollbar-thumb {
 	background-color: rgb(206, 206, 206);
 	border-radius: 20px;
+}
+
+.catalog-title {
+	display: block;
+	margin: auto;
+	text-align: center;
+	font-size: 26px;
+}
+
+.back-button {
+	background-color: rgb(1, 69, 124);
+	border-radius: 10px;
+	width: 90px;
+	height: 35px;
+	font-size: 15px;
+	border: none;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	margin-bottom: 30px;
+}
+
+.back-button:hover {
+	transform: scale(1.03);
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 

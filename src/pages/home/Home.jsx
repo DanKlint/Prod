@@ -12,8 +12,8 @@ const Home = () => {
 	const [searchValue, setSearchValue] = useState('');
 	const [selectedGenre, setSelectedGenre] = useState('All');
 	const [selectedCountry, setSelectedCountry] = useState('All');
+	const [showCatalog, setShowCatalog] = useState(false);
 
-	
 
 	useEffect(() => {
 		fetch("http://localhost:3300/movies").then((res) => res.json()).then((json) => {
@@ -36,99 +36,131 @@ const Home = () => {
 		setSelectedCountry(event.target.value);
 	}
 
+	const handleShowCatalog = () => {
+		setShowCatalog(true);
+	};
+
 	return (
 		<>
 			<Header />
 			<div className='container'>
 				<main>
-					<section className={styles["search-filters"]}>
+					{!showCatalog ? (
+						<div>
+							<section className={styles["search-filters"]}>
 
-						<SearchForm searchValue={searchValue} onChangeSearchValue={onChangeSearchValue} type="text" placeholder={"Поиск..."} />
+								<SearchForm searchValue={searchValue} onChangeSearchValue={onChangeSearchValue} type="text" placeholder={"Поиск..."} />
 
-						<button onClick={() => setOpen(true)} className={styles["filters-button"]}>
-							<img src="./assets/icon/filter.png" alt="фильтры" />
-						</button>
+								<button onClick={() => setOpen(true)} className={styles["filters-button"]}>
+									<img src="./assets/icon/filter.png" alt="фильтры" />
+								</button>
 
-					</section>
+							</section>
 
-					<section className={styles["section-slider"]} id={styles['section-slider']}>
-						<div className={styles["fantasy"]}>
-							<p className={styles["slider-genre"]}>Весь каталог</p>
-							<div className={styles["slider-line"]}>
-								<ul className={styles["list"]}>
-									{
-										movies.filter((obj) => {
-											return (
-												obj.title.toLowerCase().includes(searchValue.toLowerCase()) &&
-												(selectedGenre === 'All' || obj.genres.includes(selectedGenre)) &&
-												(selectedCountry === 'All' || obj.country.includes(selectedCountry))
-											);
-										}).map((obj) => (
-											<li>
-												<MovieCard
-													key={obj.id}
-													{...obj}
-												/>
-											</li>
-										))
-									}
-								</ul>
-							</div>
+							<section className={styles["section-slider"]} id={styles['section-slider']}>
+								<div className={styles["fantasy"]}>
+									<p className={styles["slider-genre-catalog"]} onClick={handleShowCatalog}>Весь каталог</p>
+									<div className={styles["slider-line"]}>
+										<ul className={styles["list"]}>
+											{
+												movies.filter((obj) => {
+													return (
+														obj.title.toLowerCase().includes(searchValue.toLowerCase()) &&
+														(selectedGenre === 'All' || obj.genres.includes(selectedGenre)) &&
+														(selectedCountry === 'All' || obj.country.includes(selectedCountry))
+													);
+												}).map((obj) => (
+													<li>
+														<MovieCard
+															key={obj.id}
+															{...obj}
+														/>
+													</li>
+												))
+											}
+										</ul>
+									</div>
+								</div>
+								<div className={styles["fantasy"]}>
+									<p className={styles["slider-genre"]}>НОВИНКИ</p>
+									<div className={styles["slider-line"]}>
+										<ul className={styles["list"]}>
+											{movies
+												.filter((obj) => obj.year > 2005)
+												.map((obj) => (
+													<li key={obj.id}>
+														<MovieCard {...obj} />
+													</li>
+												))}
+										</ul>
+									</div>
+								</div>
+								<div className={styles["fantasy"]}>
+									<p className={styles["slider-genre"]}>Наша подборка</p>
+									<div className={styles["slider-line"]}>
+										<ul className={styles["list"]}>
+											{
+												movies.map((obj) => (
+													<li>
+														<MovieCard
+															key={obj.id}
+															{...obj}
+														/>
+													</li>
+												))
+											}
+										</ul>
+									</div>
+								</div>
+								<div className={styles["fantasy"]}>
+									<p className={styles["slider-genre"]}>ТОП месяца</p>
+									<div className={styles["slider-line"]}>
+										<ul className={styles["list"]}>
+											{
+												movies.map((obj) => (
+													<li>
+														<MovieCard
+															key={obj.id}
+															{...obj}
+														/>
+													</li>
+												))
+											}
+										</ul>
+									</div>
+								</div>
+
+							</section>
+							<section className={styles["home-page__search&filters"]}>
+
+							</section>
 						</div>
-						<div className={styles["fantasy"]}>
-							<p className={styles["slider-genre"]}>НОВИНКИ</p>
-							<div className={styles["slider-line"]}>
-								<ul className={styles["list"]}>
-									{movies
-										.filter((obj) => obj.year > 2005)
-										.map((obj) => (
-											<li key={obj.id}>
-												<MovieCard {...obj} />
-											</li>
-										))}
-								</ul>
-							</div>
-						</div>
-						<div className={styles["fantasy"]}>
-							<p className={styles["slider-genre"]}>Наша подборка</p>
-							<div className={styles["slider-line"]}>
-								<ul className={styles["list"]}>
-									{
-										movies.map((obj) => (
-											<li>
-												<MovieCard
-													key={obj.id}
-													{...obj}
-												/>
-											</li>
-										))
-									}
-								</ul>
-							</div>
-						</div>
-						<div className={styles["fantasy"]}>
-							<p className={styles["slider-genre"]}>ТОП месяца</p>
-							<div className={styles["slider-line"]}>
-								<ul className={styles["list"]}>
-									{
-										movies.map((obj) => (
-											<li>
-												<MovieCard
-													key={obj.id}
-													{...obj}
-												/>
-											</li>
-										))
-									}
-								</ul>
-							</div>
-						</div>
-
-					</section>
-					<section className={styles["home-page__search&filters"]}>
-
-					</section>
+					) : (
+						<section className={styles["section-slider"]} id={styles["section-slider"]}>
+							<h1 className={styles["catalog-title"]}>Каталог</h1>
+							<button onClick={() => setShowCatalog(false)} className={styles["back-button"]}>
+								Назад
+							</button>
+							<ul className={styles["list-movies"]}>
+								{movies
+									.filter((obj) => {
+										return (
+											obj.title.toLowerCase().includes(searchValue.toLowerCase()) &&
+											(selectedGenre === "All" || obj.genres.includes(selectedGenre)) &&
+											(selectedCountry === "All" || obj.country.includes(selectedCountry))
+										);
+									})
+									.map((obj) => (
+										<li key={obj.id}>
+											<MovieCard key={obj.id} {...obj} />
+										</li>
+									))}
+							</ul>
+						</section>
+					)}
+					<section className={styles["home-page__search&filters"]}></section>
 				</main>
+
 			</div>
 
 			<Modal open={open} setOpen={setOpen}>

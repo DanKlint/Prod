@@ -24,6 +24,22 @@ const Register = () => {
           <InputForm name="" id="" inputPlaceholder="Логин" />
         </div>
         <div className={styles["inp"]}>
+          <FontAwesomeIcon icon={faUser} className={styles["icon"]} />
+          <InputForm name="" id="" inputPlaceholder="Имя" />
+        </div>
+        <div className={styles["inp"]}>
+          <FontAwesomeIcon icon={faUser} className={styles["icon"]} />
+          <InputForm name="" id="" inputPlaceholder="Фамилия" />
+        </div>
+        <div className={styles["inp"]}>
+          <FontAwesomeIcon icon={faUser} className={styles["icon"]} />
+          <InputForm name="" id="" inputPlaceholder="Почта" />
+        </div>
+        <div className={styles["inp"]}>
+          <FontAwesomeIcon icon={faUser} className={styles["icon"]} />
+          <InputForm name="" id="" inputPlaceholder="Дата рождения" />
+        </div>
+        <div className={styles["inp"]}>
           <FontAwesomeIcon icon={faLock} className={styles["icon"]} />
           <InputForm
             type="password"

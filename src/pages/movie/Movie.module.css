@@ -1,3 +1,10 @@
+.container-movie {
+  max-width: 70%;
+  margin: 0 auto;
+  /* max-width: 80%; */
+  position: relative;
+}
+
 .info-movie-section {
   display: flex;
   flex-direction: row;
@@ -44,9 +51,9 @@
 }
 
 .video-player {
-  min-width: 70%;
-  height: 600px;
-  background-color: gray;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .comments {
@@ -63,6 +70,47 @@
 
 .comments_tittle p {
   font-size: 20px;
+}
+
+.comment-input {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.comment-input textarea {
+  resize: none;
+  width: 40%;
+  min-height: 100px;
+  max-height: 200px;
+  border: white 1px solid;
+  padding: 10px;
+  border-radius: 14px;
+  margin-right: 20px;
+
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.button-submit {
+  background-color: rgb(1, 69, 124);
+  border-radius: 10px;
+  width: 90px;
+  height: 35px;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button-submit:hover {
+  transform: scale(1.03);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .comment {

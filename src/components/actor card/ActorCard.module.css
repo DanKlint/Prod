@@ -6,6 +6,7 @@
   border-radius: 14px;
   padding: 10px;
   max-width: 800px;
+  min-width: 600px;
 }
 
 .image__wrap {
@@ -18,10 +19,10 @@
 
 .image {
   width: 100%;
-  /* height: 100%; */
   object-fit: contain;
 }
 
 .info {
+  min-width: 400px;
   width: 600px;
 }

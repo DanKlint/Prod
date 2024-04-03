@@ -11,6 +11,7 @@ const Actors = () => {
   // const [open, setOpen] = useState(false);
   const [actors, setActors] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [selectedActor, setSelectedActor] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:3300/actors").then((res) => res.json()).then((json) => {
@@ -21,6 +22,12 @@ const Actors = () => {
     })
   }, [])
 
+  useEffect(() => {
+    if (actors.length > 0 && !selectedActor) {
+      setSelectedActor(actors[0]);
+    }
+  }, [actors, selectedActor]);
+
   const onChangeSearchValue = (even) => {
     setSearchValue(even.target.value);
   }
@@ -30,31 +37,41 @@ const Actors = () => {
     <>
       <Header />
       <div className="container">
-        <main>
-          <section className={styles["search-filters"]}>
-            <SearchForm searchValue={searchValue} onChangeSearchValue={onChangeSearchValue} placeholder="Поиск" type="text" />
-          </section>
+        <section className={styles["search-filters"]}>
+          <SearchForm searchValue={searchValue} onChangeSearchValue={onChangeSearchValue} placeholder="Поиск" type="text" />
+        </section>
+        <main className={styles["main-container"]}>
           <section className={styles["actors-section"]}>
             <ul className={styles["actors-list"]}>
-              {
-                actors.filter((obj) => {
+              {actors
+                .filter((obj) => {
                   const fullName = (obj.first_name + " " + obj.last_name).toLowerCase();
-
-                  return (
-                    fullName.includes(searchValue.toLowerCase())
-                  );
-                }).map((obj) => (
-                  <li>
+                  return fullName.includes(searchValue.toLowerCase());
+                })
+                .map((obj) => (
+                  <li key={obj.id}>
                     <ActorCard
-                      key={obj.id}
                       {...obj}
+                      isSelected={selectedActor && selectedActor.id === obj.id}
+                      onClick={() => setSelectedActor(obj.id)}
                     />
                   </li>
-                ))
-              }
+                ))}
             </ul>
           </section>
+          <section className={styles["actor-details"]}>
+            {selectedActor && (
+              <div>
+                <div className={styles["img-wrap"]}><img src={selectedActor.img} alt={selectedActor.first_name + " " + selectedActor.last_name} /></div>
+
+                <h2>{selectedActor.first_name + " " + selectedActor.last_name}</h2>
+                <p>{selectedActor.description}</p>
+                <p>{selectedActor.years} лет</p>
+              </div>
+            )}
+          </section>
         </main>
+
       </div>
       <Footer />
     </>

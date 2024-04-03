@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactPlayer from "react-player";
 import { useParams } from "react-router-dom";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
@@ -9,6 +10,7 @@ const Movie = () => {
   const { id } = useParams();
 
   const [movieData, setMovieData] = useState(null);
+  const [comment, setComment] = useState("");
 
   useEffect(() => {
     fetch(`http://localhost:3300/movies/${id}`).then((res) => res.json()).then((json) => {
@@ -19,6 +21,15 @@ const Movie = () => {
     })
   }, [id])
 
+  const handleCommentChange = (event) => {
+    setComment(event.target.value);
+  };
+
+  const handleSubmitComment = () => {
+    console.log("Отправка комментария:", comment);
+    setComment("");
+  };
+
   if (!movieData) {
     return <div>Loading...</div>; // или что-то подобное во время загрузки данных
   }
@@ -26,7 +37,7 @@ const Movie = () => {
   return (
     <>
       <Header />
-      <div className="container">
+      <div className={styles["container-movie"]}>
         <main>
           <section className={styles["info-movie-section"]}>
             <div className={styles["movie-short-info"]}>
@@ -66,12 +77,23 @@ const Movie = () => {
               </div>
             </div>
           </section>
-          <section className={styles["video-player"]}></section>
+          <section className={styles["video-player"]}>
+            <ReactPlayer url={"https://youtu.be/ifG_LGQRTN0"} controls width="60%" height="560px" />
+          </section>
           <section className={styles["comments"]}>
             <div className={styles["comments_tittle"]}>
               <h2>Комментарии</h2>
             </div>
             <div className="line"></div>
+            <div className={styles["comment-input"]}>
+              <textarea
+                type="text"
+                placeholder="Введите ваш комментарий"
+                value={comment}
+                onChange={handleCommentChange}
+              />
+              <button className={styles["button-submit"]} onClick={handleSubmitComment}>Отправить</button>
+            </div>
             <ul>
               <li>
                 <div className={styles["comment"]}>

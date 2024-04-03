@@ -17,7 +17,6 @@
 .card-wrap__img {
 	height: 220px;
 	border-radius: 12px;
-	/* margin-bottom: 4px; */
 	pointer-events: none
 }
 
@@ -29,7 +28,7 @@
 
 .movie-name {
 	color: rgb(255, 255, 255);
-	font-size: 17px;
+	font-size: 19px;
 	margin-top: 8px;
 	font-family: var(--main-bold-font)
 }
