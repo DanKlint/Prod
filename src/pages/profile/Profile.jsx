@@ -36,7 +36,6 @@ const Profile = () => {
             </div>
           </div>
           <div className={styles["profile-favourites"]}>
-            {/* <div className={styles["fantasy"]}> */}
             <p className={styles["slider-favourites"]}>Избранное</p>
             <div className={styles["slider-line"]}>
               <ul className={styles["list"]}>
@@ -49,7 +48,6 @@ const Profile = () => {
                   ))}
               </ul>
             </div>
-            {/* </div> */}
           </div>
         </main>
       </div>
