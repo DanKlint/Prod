@@ -64,7 +64,7 @@ namespace Movies.API.Controllers.Actors
                 Name = actor.Name,
                 Surname = actor.Surname,
                 Description = actor.Description,
-                BirthDate = actor.BirthDate,
+                BirthDate = DateOnly.Parse(actor.BirthDate),
             };
 
             _context.Actors.Add(dbActor);
