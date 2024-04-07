@@ -48,13 +48,15 @@ namespace Movies.API.Controllers.Posts
         [HttpPost("api/posts/create")]
         public async Task<IActionResult> CreatePostAsync([FromBody] PostCreateModel post)
         {
-            var filmName = await _context.Films.Where(x => x.Id == post.FilmId).Select(x => x.FilmName).SingleOrDefaultAsync();
-
-            if (string.IsNullOrEmpty(filmName))
+            if (post.FilmId != null)
             {
-                return BadRequest("Фильм не существует!");
+                var filmName = await _context.Films.Where(x => x.Id == post.FilmId).Select(x => x.FilmName).SingleOrDefaultAsync();
+
+                if (string.IsNullOrEmpty(filmName))
+                {
+                    return BadRequest("Фильм не существует!");
+                }
             }
-            
             var dbPost = new Post
             {
                 Title = post.Title,
