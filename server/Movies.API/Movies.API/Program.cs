@@ -20,7 +20,18 @@ namespace Movies.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(options =>
+                options.AddPolicy("AllPolicy", policy =>
+                {
+                    policy.AllowAnyOrigin();
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                })
+            );
+
             var app = builder.Build();
+
+            app.UseCors("AllPolicy");
 
             using var scope = app.Services.CreateScope();
             {
