@@ -48,9 +48,10 @@ namespace Movies.API.Controllers.Posts
         [HttpPost("api/posts/create")]
         public async Task<IActionResult> CreatePostAsync([FromBody] PostCreateModel post)
         {
+            string filmName = null;
             if (post.FilmId != null)
             {
-                var filmName = await _context.Films.Where(x => x.Id == post.FilmId).Select(x => x.FilmName).SingleOrDefaultAsync();
+                filmName = await _context.Films.Where(x => x.Id == post.FilmId).Select(x => x.FilmName).SingleOrDefaultAsync();
 
                 if (string.IsNullOrEmpty(filmName))
                 {

@@ -154,6 +154,10 @@ namespace Movies.API.Controllers.Films
 
             await _context.SaveChangesAsync();
 
+            await _context.Entry(dbMovie).Reference(x => x.Country).LoadAsync();
+            await _context.Entry(dbMovie).Reference(x => x.Director).LoadAsync();
+            await _context.Entry(dbMovie).Reference(x => x.Genre).LoadAsync();
+
             var response = new FilmsModel
             {
                 Id = dbMovie.Id,
