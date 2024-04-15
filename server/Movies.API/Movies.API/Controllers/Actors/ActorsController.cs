@@ -32,7 +32,8 @@ namespace Movies.API.Controllers.Actors
                     Name = x.Name,
                     Surname = x.Surname,
                     Description = x.Description,
-                    BirthDate = x.BirthDate
+                    BirthDate = x.BirthDate,
+                    ImageUrl = x.ImageUrl
                 })
                 .ToListAsync();
 
@@ -51,7 +52,8 @@ namespace Movies.API.Controllers.Actors
                     Name = x.Name,
                     Surname = x.Surname,
                     Description = x.Description,
-                    BirthDate = x.BirthDate
+                    BirthDate = x.BirthDate,
+                    ImageUrl = x.ImageUrl
                 })
                 .SingleAsync());
         }
@@ -65,6 +67,7 @@ namespace Movies.API.Controllers.Actors
                 Surname = actor.Surname,
                 Description = actor.Description,
                 BirthDate = DateOnly.Parse(actor.BirthDate),
+                ImageUrl = actor.ImageUrl
             };
 
             _context.Actors.Add(dbActor);
@@ -77,7 +80,42 @@ namespace Movies.API.Controllers.Actors
                 Name = dbActor.Name,
                 Surname = dbActor.Surname,
                 Description = dbActor.Description,
-                BirthDate = dbActor.BirthDate
+                BirthDate = dbActor.BirthDate,
+                ImageUrl = dbActor.ImageUrl
+            };
+
+            return Ok(response);
+        }
+
+        [HttpPut("api/actors/{actorId::int}/create")]
+        public async Task<IActionResult> CreateActorAsync([FromRoute] int actorId, [FromBody] ActorUpdateModel model)
+        {
+            var actor = await _context.Actors
+                .AsTracking()
+                .Where(x => x.Id == actorId)
+                .SingleOrDefaultAsync();
+
+            if(actor == null)
+            {
+                return NotFound();
+            }
+
+            actor.Name = model.Name;
+            actor.Surname = model.Surname;
+            actor.ImageUrl = model.ImageUrl;
+            actor.Description = model.Description;
+            actor.BirthDate = DateOnly.Parse(model.BirthDate);
+
+            await _context.SaveChangesAsync();
+
+            var response = new ActorModel
+            {
+                Id = actor.Id,
+                Name = actor.Name,
+                Surname = actor.Surname,
+                Description = actor.Description,
+                BirthDate = actor.BirthDate,
+                ImageUrl = actor.ImageUrl
             };
 
             return Ok(response);

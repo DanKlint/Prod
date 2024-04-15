@@ -185,5 +185,61 @@ namespace Movies.API.Controllers.Films
             };
             return Ok(response);
         }
+
+        [HttpPut("api/movies/{filmId::int}/update")]
+        public async Task<IActionResult> UpdateMovieAsync([FromRoute] int filmId, [FromBody] FilmUpdateModel model)
+        {
+            var existingMovie = await _context.Films
+                .AsTracking()
+                .Where(x => x.Id == filmId)
+                .SingleOrDefaultAsync();
+
+            if(existingMovie == null)
+            {
+                return NotFound();
+            }
+
+            existingMovie.FilmName = model.FilmName;
+            existingMovie.Description = model.Description;
+            existingMovie.Year = model.Year;
+            existingMovie.PreviewImageUrl = model.PreviewImageUrl;
+            existingMovie.DurationInMinutes = model.DurationInMinutes;
+            existingMovie.GenreId = model.GenreId;
+            existingMovie.DirectorId = model.DirectorId;
+            existingMovie.CountryId = model.CountryId;
+
+            await _context.SaveChangesAsync();
+
+            await _context.Entry(existingMovie).Reference(x => x.Country).LoadAsync();
+            await _context.Entry(existingMovie).Reference(x => x.Director).LoadAsync();
+            await _context.Entry(existingMovie).Reference(x => x.Genre).LoadAsync();
+
+            var response = new FilmsModel
+            {
+                Id = existingMovie.Id,
+                FilmName = existingMovie.FilmName,
+                Description = existingMovie.Description,
+                Country = new Countries.CountryModel
+                {
+                    Id = existingMovie.Country.Id,
+                    Name = existingMovie.Country.Name,
+                },
+                Director = new Directors.DirectorModel
+                {
+                    Id = existingMovie.Director.Id,
+                    Firstname = existingMovie.Director.FirstName,
+                    Surname = existingMovie.Director.Surname,
+                },
+                DurationInMinutes = existingMovie.DurationInMinutes,
+                Genre = new Genres.GenreModel
+                {
+                    Id = existingMovie.Genre.Id,
+                    Name = existingMovie.Genre.Name
+                },
+                PreviewImageUrl = existingMovie.PreviewImageUrl,
+                Year = existingMovie.Year
+            };
+            return Ok(response);
+        }
     }
 }

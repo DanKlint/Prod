@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Database.Entities
 {
@@ -13,6 +14,9 @@ namespace Database.Entities
 
         [Required]
         public string Description { get; set; }
+
+        [Required]
+        public string ImageUrl { get; set; }
         [Required]
         public DateOnly BirthDate { get; set; }
 

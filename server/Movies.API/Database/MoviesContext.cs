@@ -50,6 +50,11 @@ namespace Database
             .WithMany(x => x.Posts)
             .HasForeignKey(x => x.FilmId);
 
+       modelBuilder.Entity<Actor>()
+           .Property(x => x.ImageUrl)
+           .HasDefaultValue(false)
+           .IsRequired(true);
+
         base.OnModelCreating(modelBuilder);
     }
 }
