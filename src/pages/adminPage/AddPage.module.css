@@ -1,0 +1,70 @@
+.select-bnt {
+	background-color: rgb(1, 69, 124);
+	border-radius: 10px;
+	width: 130px;
+	height: 35px;
+	border: none;
+	margin-right: 20px;
+	margin-bottom: 30px;
+}
+
+.active {
+	background-color: #980fbe;
+	border-radius: 10px;
+	width: 130px;
+	height: 35px;
+	border: none;
+	margin-right: 20px;
+	margin-bottom: 30px;
+}
+
+.form {
+	margin: 0 auto;
+	width: 600px;
+	display: flex;
+	flex-direction: column;
+}
+
+.label {
+	font-size: 18px;
+	color: white;
+	margin-bottom: 10px;
+}
+
+.input {
+	margin-bottom: 20px;
+	width: 400px;
+	height: 30px;
+
+	border: none;
+	outline: none;
+	background: none;
+	/* width: 260px; */
+	/* margin-top: 40px; */
+	/* padding-right: 10px; */
+	font-size: 17px;
+	color: #0ef;
+	border-bottom: 2px solid #0ef;
+}
+
+.textarea {
+	margin-bottom: 20px;
+	min-height: 25px;
+
+	border: none;
+	outline: none;
+	background: none;
+	font-size: 17px;
+	color: #0ef;
+	border-bottom: 2px solid #0ef;
+}
+
+.btn-add {
+	margin: 0 auto;
+	background-color: rgb(1, 69, 124);
+	border-radius: 10px;
+	width: 130px;
+	height: 35px;
+	border: none;
+	margin-top: 50px;
+}

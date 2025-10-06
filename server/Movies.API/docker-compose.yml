@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  db_movies:
+    container_name: db_movies
+    image: postgres:15.4
+    restart: always
+    environment:
+      POSTGRES_DB: "movies_db"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - local_pgdata:/var/lib/postgresql/data
+    ports:
+      - "8000:5432"
+volumes:
+  local_pgdata:

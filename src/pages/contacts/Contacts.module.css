@@ -1,0 +1,73 @@
+.columns {
+  display: flex;
+}
+
+.column {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.one {
+  padding: 74px 0 0 0;
+}
+
+.main-column {
+  flex: 1;
+  margin: 0 15px 0 15px;
+}
+
+.help-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 5px 5px 7px rgba(170, 170, 170, 0.4),
+    -5px -2px 7px rgba(170, 170, 170, 0.4);
+  border-radius: 14px;
+}
+
+.middle-container {
+  margin-top: 10px;
+}
+
+.postal_address {
+  margin-top: 10px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.mini-tittle {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+.under-line {
+  margin-top: 10px;
+}
+
+.text-oblique {
+  font-style: oblique;
+}
+
+.info {
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+.social_network {
+  margin-top: 10px;
+}
+
+.social_network li {
+  list-style-type: none;
+  margin-bottom: 10px;
+}

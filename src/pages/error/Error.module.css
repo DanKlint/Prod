@@ -1,0 +1,11 @@
+.error-block {
+	padding-top: 200px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.error-block p {
+	font-size: 28px;
+	font-weight: 600;
+	color: rgb(255, 255, 255);
+}
