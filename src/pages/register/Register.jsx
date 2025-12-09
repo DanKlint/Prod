@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -15,6 +15,24 @@ import styles from "./Register.module.css";
 import InputForm from "../../components/inputForm/InputForm";
 
 const Register = () => {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordMatchError, setPasswordMatchError] = useState(false);
+
+  const handlePasswordChange = (event) => {
+    const value = event.target.value;
+    setPassword(value);
+    // Проверяем совпадают ли пароли
+    setPasswordMatchError(value !== confirmPassword);
+  };
+
+  const handleConfirmPasswordChange = (event) => {
+    const value = event.target.value;
+    setConfirmPassword(value);
+    // Проверяем совпадают ли пароли
+    setPasswordMatchError(value !== password);
+  };
+
   return (
     <main className={styles["wrapper"]}>
       <form action="" className={styles["form"]} autocomplete="off">
@@ -47,6 +65,8 @@ const Register = () => {
             id=""
             inputPlaceholder="Пароль"
             autoComplete="new-password"
+            searchValue={password}
+            onChangeSearchValue={handlePasswordChange}
           />
         </div>
         <div className={styles["inp"]}>
@@ -57,8 +77,14 @@ const Register = () => {
             id=""
             inputPlaceholder="Подтвердите пароль"
             autoComplete="new-password"
+            searchValue={confirmPassword}
+            onChangeSearchValue={handleConfirmPasswordChange}
           />
+
         </div>
+        {passwordMatchError && (
+          <div className={styles['error']}>Пароли не совпадают</div>
+        )}
         <button className={styles["submit"]}>Зарегистрироваться</button>
         <p className={styles["footer"]}>
           Есть аккаунт?

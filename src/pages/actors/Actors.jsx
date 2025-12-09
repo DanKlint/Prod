@@ -13,14 +13,28 @@ const Actors = () => {
   const [searchValue, setSearchValue] = useState('');
   const [selectedActor, setSelectedActor] = useState(null);
 
+
+
   useEffect(() => {
-    fetch("http://localhost:3300/actors").then((res) => res.json()).then((json) => {
+    fetch("https://localhost:7236/api/actors/list").then((res) => res.json()).then((json) => {
       setActors(json);
     }).catch((err) => {
       console.warn(err);
       alert("Ошибка получения данных актеров...");
     })
-  }, [])
+  }, []);
+
+  const loadActorDetails = (actorId) => {
+    fetch(`https://localhost:7236/api/actors/${actorId}/details`)
+      .then((res) => res.json())
+      .then((json) => {
+        setSelectedActor(json);
+      })
+      .catch((err) => {
+        console.warn(err);
+        alert("Ошибка получения данных об актере...");
+      });
+  };
 
   useEffect(() => {
     if (actors.length > 0 && !selectedActor) {
@@ -31,7 +45,6 @@ const Actors = () => {
   const onChangeSearchValue = (even) => {
     setSearchValue(even.target.value);
   }
-
 
   return (
     <>
@@ -45,7 +58,7 @@ const Actors = () => {
             <ul className={styles["actors-list"]}>
               {actors
                 .filter((obj) => {
-                  const fullName = (obj.first_name + " " + obj.last_name).toLowerCase();
+                  const fullName = (obj.name + " " + obj.surname).toLowerCase();
                   return fullName.includes(searchValue.toLowerCase());
                 })
                 .map((obj) => (
@@ -53,7 +66,7 @@ const Actors = () => {
                     <ActorCard
                       {...obj}
                       isSelected={selectedActor && selectedActor.id === obj.id}
-                      onClick={() => setSelectedActor(obj.id)}
+                      onClick={() => loadActorDetails(obj.id)}
                     />
                   </li>
                 ))}
@@ -62,11 +75,13 @@ const Actors = () => {
           <section className={styles["actor-details"]}>
             {selectedActor && (
               <div>
-                <div className={styles["img-wrap"]}><img src={selectedActor.img} alt={selectedActor.first_name + " " + selectedActor.last_name} /></div>
-
-                <h2>{selectedActor.first_name + " " + selectedActor.last_name}</h2>
+                <div className={styles["img-wrap"]}>
+                  {/* <img src={selectedActor.img} alt={selectedActor.name + " " + selectedActor.surname} /> */}
+                  <img src={selectedActor.imageUrl} alt={selectedActor.name + " " + selectedActor.surname} />
+                </div>
+                <h2>{selectedActor.name + " " + selectedActor.surname}</h2>
                 <p>{selectedActor.description}</p>
-                <p>{selectedActor.years} лет</p>
+                {/* <p>{selectedActor.birthDate} лет</p> */}
               </div>
             )}
           </section>

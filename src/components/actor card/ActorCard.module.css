@@ -5,13 +5,15 @@
     -5px -2px 7px rgba(170, 170, 170, 0.4);
   border-radius: 14px;
   padding: 10px;
+  width: 100%;
   max-width: 800px;
-  min-width: 600px;
+  min-width: 400px;
+  cursor: pointer;
 }
 
 .image__wrap {
   width: 200px;
-  height: 250px;
+  height: 200px;
   margin-right: 10px;
   overflow: hidden;
   border-radius: 14px;

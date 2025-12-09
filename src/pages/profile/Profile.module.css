@@ -1,9 +1,16 @@
 .profile-info {
   margin: 0 auto;
   display: grid;
+  min-width: 890px;
+  max-width: 890px;
   gap: 20px;
   width: 70%;
   grid-template-columns: 200px auto;
+  user-select: none;
+}
+
+p {
+  user-select: none;
 }
 
 .profile-photo {
@@ -22,13 +29,68 @@
   border-radius: 14px;
 }
 
+.my-profile {
+  font-size: 1.3em;
+  font-weight: 600;
+  display: block;
+  text-align: center;
+  margin: 0 0 10px 0;
+}
+
 .profile-details {
+  max-width: 670px;
   padding: 10px;
   height: 270px;
   box-shadow: 2px 2px 5px rgba(170, 170, 170, 0.4),
     -5px -2px 7px rgba(170, 170, 170, 0.4);
-  /* background-color: rgb(211, 211, 211); */
   border-radius: 14px;
+}
+
+.v-line {
+  width: 2px;
+  height: 200px;
+  background: rgba(170, 170, 170, 0.4);
+}
+
+.profile-blocks {
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid rgba(170, 170, 170, 0.4);
+}
+
+.profile-block {
+  padding: 10px 20px 0 20px;
+  min-width: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.info-block {
+  min-width: 200px;
+  padding: 10px 10px 0 10px;
+  justify-content: flex-start;
+}
+
+.profile-blocks button {}
+
+.password-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.password {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
 }
 
 .slider-favourites {
@@ -40,15 +102,16 @@
 }
 
 .profile-favourites {
+  max-width: 890px;
   padding: 10px;
   width: 70%;
+  min-width: 890px;
   height: 360px;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 20px;
   box-shadow: 2px 2px 5px rgba(170, 170, 170, 0.4),
     -5px -2px 7px rgba(170, 170, 170, 0.4);
-  /* background-color: rgb(211, 211, 211); */
   border-radius: 14px;
 }
 

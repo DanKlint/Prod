@@ -12,3 +12,9 @@
 .input::-webkit-input-placeholder {
 	color: #eee;
 }
+
+.error {
+	color: red;
+	margin-top: 5px;
+	font-size: 14px;
+}

@@ -12,6 +12,8 @@ import Actors from "./pages/actors/Actors";
 import Contacts from "./pages/contacts/Contacts";
 import Profile from "./pages/profile/Profile";
 import Movie from "./pages/movie/Movie";
+import Error from "./pages/error/Error";
+import AddPage from "./pages/adminPage/AddPage";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/movie/:id" element={<Movie />} />
+        <Route path="*" element={<Error />} />
+        <Route path="add" element={<AddPage />} />
         {/* <Route element={<RequireAuth />}>
           <Route path="/" index element={<Home />} />
           <Route path="/news" index element={<News />} />

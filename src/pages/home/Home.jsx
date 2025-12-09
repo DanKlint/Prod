@@ -6,17 +6,19 @@ import styles from './Home.module.css';
 import Modal from "../../components/modalFilter/Modal";
 import SearchForm from "../../components/searchForm/SearchForm";
 
+import { getDailyTheme, filterMoviesByTheme } from "./dailyMovieSelection";
+
 const Home = () => {
 	const [open, setOpen] = useState(false);
 	const [movies, setMovies] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
-	const [selectedGenre, setSelectedGenre] = useState('All');
-	const [selectedCountry, setSelectedCountry] = useState('All');
+	const [selectedGenre, setSelectedGenre] = useState('Все');
+	const [selectedCountry, setSelectedCountry] = useState('Все');
 	const [showCatalog, setShowCatalog] = useState(false);
 
 
 	useEffect(() => {
-		fetch("http://localhost:3300/movies").then((res) => res.json()).then((json) => {
+		fetch("https://localhost:7236/api/movies/list").then((res) => res.json()).then((json) => {
 			setMovies(json);
 		}).catch((err) => {
 			console.warn(err);
@@ -39,6 +41,9 @@ const Home = () => {
 	const handleShowCatalog = () => {
 		setShowCatalog(true);
 	};
+
+	const dailyTheme = getDailyTheme();
+	const filteredMovies = filterMoviesByTheme(movies, dailyTheme);
 
 	return (
 		<>
@@ -65,9 +70,12 @@ const Home = () => {
 											{
 												movies.filter((obj) => {
 													return (
-														obj.title.toLowerCase().includes(searchValue.toLowerCase()) &&
-														(selectedGenre === 'All' || obj.genres.includes(selectedGenre)) &&
-														(selectedCountry === 'All' || obj.country.includes(selectedCountry))
+														// obj.filmName.toLowerCase().includes(searchValue.toLowerCase()) &&
+														// (selectedGenre === 'All' || obj.genres.includes(selectedGenre)) &&
+														// (selectedCountry === 'All' || obj.country.includes(selectedCountry))
+														obj.filmName.toLowerCase().includes(searchValue.toLowerCase()) &&
+														(selectedGenre === 'Все' || obj.genre.name === selectedGenre) &&
+														(selectedCountry === "Все" || obj.country.name === selectedCountry)
 													);
 												}).map((obj) => (
 													<li>
@@ -86,7 +94,7 @@ const Home = () => {
 									<div className={styles["slider-line"]}>
 										<ul className={styles["list"]}>
 											{movies
-												.filter((obj) => obj.year > 2005)
+												.filter((obj) => obj.year > 2021)
 												.map((obj) => (
 													<li key={obj.id}>
 														<MovieCard {...obj} />
@@ -96,19 +104,14 @@ const Home = () => {
 									</div>
 								</div>
 								<div className={styles["fantasy"]}>
-									<p className={styles["slider-genre"]}>Наша подборка</p>
+									<p className={styles["slider-genre"]}>Наша подборка сегодня: {dailyTheme}</p>
 									<div className={styles["slider-line"]}>
 										<ul className={styles["list"]}>
-											{
-												movies.map((obj) => (
-													<li>
-														<MovieCard
-															key={obj.id}
-															{...obj}
-														/>
-													</li>
-												))
-											}
+											{filteredMovies.map((obj) => (
+												<li key={obj.id}>
+													<MovieCard {...obj} />
+												</li>
+											))}
 										</ul>
 									</div>
 								</div>
@@ -145,9 +148,9 @@ const Home = () => {
 								{movies
 									.filter((obj) => {
 										return (
-											obj.title.toLowerCase().includes(searchValue.toLowerCase()) &&
-											(selectedGenre === "All" || obj.genres.includes(selectedGenre)) &&
-											(selectedCountry === "All" || obj.country.includes(selectedCountry))
+											obj.filmName.toLowerCase().includes(searchValue.toLowerCase()) &&
+											(selectedGenre === 'Все' || obj.genre.name === selectedGenre) &&
+											(selectedCountry === "Все" || obj.country.name === selectedCountry)
 										);
 									})
 									.map((obj) => (
@@ -165,35 +168,35 @@ const Home = () => {
 
 			<Modal open={open} setOpen={setOpen}>
 				<div className={styles["filter-title"]}>Жанры:</div>
-				<input type="radio" id="All" name="genres" value="All" checked={selectedGenre === 'All'}
+				<input type="radio" id="All" name="genres" value="Все" checked={selectedGenre === 'Все'}
 					onChange={handleGenreChange} />
-				<input type="radio" id="Comedy" name="genres" value="Comedy" checked={selectedGenre === 'Comedy'}
+				<input type="radio" id="Comedy" name="genres" value="Комедия" checked={selectedGenre === 'Комедия'}
 					onChange={handleGenreChange} />
-				<input type="radio" id="Crime" name="genres" value="Crime" checked={selectedGenre === 'Crime'}
+				<input type="radio" id="Crime" name="genres" value="Криминал" checked={selectedGenre === 'Криминал'}
 					onChange={handleGenreChange} />
-				<input type="radio" id="Drama" name="genres" value="Drama" checked={selectedGenre === 'Drama'}
+				<input type="radio" id="Drama" name="genres" value="Драма" checked={selectedGenre === 'Драма'}
 					onChange={handleGenreChange} />
-				<input type="radio" id="Detective" name="genres" value="Detective" checked={selectedGenre === 'Detective'}
+				<input type="radio" id="Detective" name="genres" value="Детектив" checked={selectedGenre === 'Детектив'}
 					onChange={handleGenreChange} />
-				<input type="radio" id="Documentaries" name="genres" value="Documentaries" checked={selectedGenre === 'Documentaries'}
+				<input type="radio" id="Documentaries" name="genres" value="Документальное" checked={selectedGenre === 'Документальное'}
 					onChange={handleGenreChange} />
-				<input type="radio" id="Action" name="genres" value="Action" checked={selectedGenre === 'Action'}
+				<input type="radio" id="Action" name="genres" value="Боевик" checked={selectedGenre === 'Боевик'}
 					onChange={handleGenreChange} />
-				<input type="radio" id="Western" name="genres" value="Western" checked={selectedGenre === 'Western'}
+				<input type="radio" id="Western" name="genres" value="Вестерн" checked={selectedGenre === 'Вестерн'}
 					onChange={handleGenreChange} />
-				<input type="radio" id="War" name="genres" value="War" checked={selectedGenre === 'War'}
+				<input type="radio" id="War" name="genres" value="Военный" checked={selectedGenre === 'Военный'}
 					onChange={handleGenreChange} />
-				<input type="radio" id="Horrors" name="genres" value="Horrors" checked={selectedGenre === 'Horrors'}
+				<input type="radio" id="Horrors" name="genres" value="Хоррор" checked={selectedGenre === 'Хоррор'}
 					onChange={handleGenreChange} />
-				<input type="radio" id="Fiction" name="genres" value="Fiction" checked={selectedGenre === 'Fiction'}
+				<input type="radio" id="Fiction" name="genres" value="Фантастика" checked={selectedGenre === 'Фантастика'}
 					onChange={handleGenreChange} />
-				<input type="radio" id="Fantasy" name="genres" value="Fantasy" checked={selectedGenre === 'Fantasy'}
+				<input type="radio" id="Fantasy" name="genres" value="Фэнтези" checked={selectedGenre === 'Фэнтези'}
 					onChange={handleGenreChange} />
-				<input type="radio" id="Adventures" name="genres" value="Adventures" checked={selectedGenre === 'Adventures'}
+				<input type="radio" id="Adventures" name="genres" value="Приключения" checked={selectedGenre === 'Приключения'}
 					onChange={handleGenreChange} />
-				<input type="radio" id="Melodrama" name="genres" value="Melodrama" checked={selectedGenre === 'Melodrama'}
+				<input type="radio" id="Melodrama" name="genres" value="Мелодрамы" checked={selectedGenre === 'Мелодрамы'}
 					onChange={handleGenreChange} />
-				<input type="radio" id="Thrillers" name="genres" value="Thrillers" checked={selectedGenre === 'Thrillers'}
+				<input type="radio" id="Thrillers" name="genres" value="Триллер" checked={selectedGenre === 'Триллер'}
 					onChange={handleGenreChange} />
 
 				<ol className={styles["filters-genre"]}>
@@ -247,7 +250,7 @@ const Home = () => {
 				<div className="line"></div>
 
 				<div className={styles["filter-title"]}>Страна:</div>
-				<input type="radio" id="All" name="country" value="All" checked={selectedCountry === 'All'}
+				<input type="radio" id="Все" name="country" value="Все" checked={selectedCountry === 'Все'}
 					onChange={handleCountryChange} />
 				<input type="radio" id="Russia" name="country" value="Russia" checked={selectedCountry === 'Russia'}
 					onChange={handleCountryChange} />
@@ -255,12 +258,12 @@ const Home = () => {
 					onChange={handleCountryChange} />
 				<input type="radio" id="Dorama" name="country" value="Dorama" checked={selectedCountry === 'Dorama'}
 					onChange={handleCountryChange} />
-				<input type="radio" id="USA" name="country" value="USA" checked={selectedCountry === 'USA'}
+				<input type="radio" id="USA" name="country" value="США" checked={selectedCountry === 'США'}
 					onChange={handleCountryChange} />
 
 				<ol className={styles["filters-country"]}>
 					<li>
-						<label for="All">Все</label>
+						<label for="Все">Все</label>
 					</li>
 					<li>
 						<label for="Russia">Россия</label>
